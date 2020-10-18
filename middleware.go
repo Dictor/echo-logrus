@@ -20,10 +20,12 @@ func Attach(e *echo.Echo) EchoLogger {
 	el := New()
 	e.Logger = el
 	e.Use(el.Hook())
-	e.HTTPErrorHandler = func(err error, c echo.Context) {
-		el.HTTPErrorHandler(err, c)
-		e.DefaultHTTPErrorHandler(err, c)
-	}
+	/*
+		e.HTTPErrorHandler = func(err error, c echo.Context) {
+			el.HTTPErrorHandler(err, c)
+			e.DefaultHTTPErrorHandler(err, c)
+		}
+	*/
 	return el
 }
 
