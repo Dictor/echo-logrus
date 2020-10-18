@@ -10,16 +10,20 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-//Make new EchoLogger struct with new logrus struct.
+// New create new EchoLogger struct with new logrus struct.
 func New() EchoLogger {
 	return EchoLogger{logrus.New()}
 }
 
-//Make and attach it to echo, use for simple code.
+// Attach create and attach EchoLogger to echo, use for simple code.
 func Attach(e *echo.Echo) EchoLogger {
 	el := New()
 	e.Logger = el
 	e.Use(el.Hook())
+	e.HTTPErrorHandler = func(err error, c echo.Context) {
+		el.HTTPErrorHandler(err, c)
+		e.DefaultHTTPErrorHandler(err, c)
+	}
 	return el
 }
 
