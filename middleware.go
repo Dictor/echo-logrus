@@ -1,12 +1,13 @@
 package echologrus
 
 import (
-	echo "github.com/labstack/echo/v4"
-	"github.com/labstack/gommon/log"
-	"github.com/sirupsen/logrus"
 	"io"
 	"strconv"
 	"time"
+
+	echo "github.com/labstack/echo/v4"
+	"github.com/labstack/gommon/log"
+	"github.com/sirupsen/logrus"
 )
 
 //Make new EchoLogger struct with new logrus struct.
@@ -46,6 +47,16 @@ func (l EchoLogger) Level() log.Lvl {
 	default:
 		return log.OFF //original implemetation panics in this case, but is panicking good choice in log function?
 	}
+}
+
+// HTTPErrorHandler log HTTP error through logrus and pass error to echo's default error handler.
+func (l EchoLogger) HTTPErrorHandler(err error, cxt echo.Context) {
+	l.Logger.WithFields(map[string]interface{}{
+		"time_rfc3339": time.Now().Format(time.RFC3339),
+		"context":      cxt,
+		"error":        err,
+	}).Error("Handled HTTP error")
+	cxt.Echo().DefaultHTTPErrorHandler(err, cxt)
 }
 
 /*
