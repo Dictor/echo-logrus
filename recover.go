@@ -68,7 +68,7 @@ func RecoverWithConfig(config RecoverConfig) echo.MiddlewareFunc {
 						config.Logger.Logger.WithFields(map[string]interface{}{
 							"error": err,
 							"stack": string(stack[:length]),
-						}).Panic("Panic recovered")
+						}).Error("Panic recovered")
 					}
 					c.Error(err)
 				}
