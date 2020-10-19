@@ -67,8 +67,8 @@ func RecoverWithConfig(config RecoverConfig) echo.MiddlewareFunc {
 					if !config.DisablePrintStack {
 						config.Logger.Logger.WithFields(map[string]interface{}{
 							"error": err,
-							"stack": stack[:length],
-						}).Info("Panic recovered")
+							"stack": string(stack[:length]),
+						}).Panic("Panic recovered")
 					}
 					c.Error(err)
 				}
