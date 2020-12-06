@@ -1,6 +1,6 @@
 ## echologrus
-[![PkgGoDev](https://pkg.go.dev/badge/Dictor/echologrus)](https://pkg.go.dev/Dictor/echologrus)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/dictor/echologrus)](https://pkg.go.dev/github.com/dictor/echologrus)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 Middleware echologrus is a [logrus](https://github.com/sirupsen/logrus) logger support for [echo](https://github.com/labstack/echo).
 Only support echo **v4**.
